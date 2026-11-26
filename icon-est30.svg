@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="55 60 390 390">
+  <defs>
+    <pattern id="rayadoGuindaEST30" width="6" height="10" patternUnits="userSpaceOnUse">
+      <rect width="6" height="10" fill="#ffffff"/>
+      <line x1="3.2" y1="0" x2="3.2" y2="10" stroke="#8C3542" stroke-width="2.1"/>
+    </pattern>
+  </defs>
+  <rect x="55" y="60" width="390" height="390" rx="72" fill="#ffffff"/>
+  <polygon points="222,70 278,70 284,118 326,135 364,102 402,140 369,178 386,220 434,226 434,282 386,288 369,330 402,368 364,406 326,373 284,390 278,438 222,438 216,390 174,373 136,406 98,368 131,330 114,288 66,282 66,226 114,220 131,178 98,140 136,102 174,135 216,118" fill="url(#rayadoGuindaEST30)" stroke="#8C3542" stroke-width="3.5" stroke-linejoin="round"/>
+  <polygon points="250,152 335,200 335,308 250,356 165,308 165,200" fill="#ffffff" stroke="#8C3542" stroke-width="3.5"/>
+  <polygon points="203,126 297,126 306,166 194,166" fill="#ffffff" stroke="#8C3542" stroke-width="3"/>
+  <text x="250" y="156" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#8C3542" text-anchor="middle">DGEST</text>
+  <polygon points="140,298 154,298 165,318 232,362 232,380 152,326" fill="#ffffff" stroke="#8C3542" stroke-width="2.5"/>
+  <polygon points="360,298 346,298 335,318 268,362 268,380 348,326" fill="#ffffff" stroke="#8C3542" stroke-width="2.5"/>
+  <ellipse cx="235" cy="197" rx="8.5" ry="13.5" transform="rotate(15 235 197)" fill="#8C3542"/>
+  <path d="M 244,226 L 228,215 L 207,252 L 240,252 L 240,322 L 208,322 L 208,292 L 232,292" fill="none" stroke="#8C3542" stroke-width="8" stroke-linecap="square"/>
+  <line x1="208" y1="307" x2="225" y2="307" stroke="#8C3542" stroke-width="6"/>
+  <line x1="227" y1="268" x2="278" y2="268" stroke="#8C3542" stroke-width="8"/>
+  <line x1="253" y1="268" x2="253" y2="325" stroke="#8C3542" stroke-width="8"/>
+  <text x="285" y="322" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#8C3542" text-anchor="middle">30</text>
+</svg>

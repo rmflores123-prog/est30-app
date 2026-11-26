@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#7f2f3c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="EST N° 30">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon-est30.svg">
+  <link rel="apple-touch-icon" href="icon-est30.svg">
+  <title>Sistema Integral • EST N° 30 “José María Parás”</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #0f172a; color: #f8fafc; }
+    iframe { width: 100%; height: 100%; border: none; display: block; background: #f8fafc; }
+    .setup-wrap {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px;
+      background: linear-gradient(135deg, #4b141f 0%, #7f2f3c 55%, #0f172a 100%);
+    }
+    .card {
+      width: 100%; max-width: 480px; background: #ffffff; color: #0f172a; border-radius: 20px;
+      padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); border-top: 5px solid #7f2f3c;
+    }
+    .badge { display: inline-block; background: #fef3c7; color: #92400e; font-weight: 800; font-size: 11px; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; margin-bottom: 10px; }
+    h1 { font-size: 18px; font-weight: 900; color: #0f172a; line-height: 1.25; }
+    p { font-size: 13px; color: #475569; margin-top: 8px; line-height: 1.45; }
+    label { display: block; font-size: 12px; font-weight: 700; color: #334155; margin-top: 16px; margin-bottom: 6px; }
+    input {
+      width: 100%; padding: 11px 12px; border: 2px solid #cbd5e1; border-radius: 12px;
+      font-size: 12px; font-family: monospace; outline: none;
+    }
+    input:focus { border-color: #7f2f3c; }
+    .btn {
+      width: 100%; margin-top: 14px; padding: 12px; border: none; border-radius: 12px;
+      background: #7f2f3c; color: #fff; font-weight: 800; font-size: 14px; cursor: pointer;
+    }
+    .btn:hover { background: #64222d; }
+    .tips {
+      margin-top: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 12px; font-size: 11.5px; color: #334155; line-height: 1.45;
+    }
+    .tips b { color: #7f2f3c; }
+    .float-tools {
+      position: fixed; bottom: 10px; right: 10px; z-index: 9999; display: flex; gap: 6px; opacity: 0.35; transition: opacity 0.2s;
+    }
+    .float-tools:hover { opacity: 1; }
+    .float-btn {
+      background: rgba(15, 23, 42, 0.85); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px; padding: 6px 10px; font-size: 11px; font-weight: 700; cursor: pointer; text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="appContainer" style="width:100%;height:100%;"></div>
+
+  <script>
+    // Si deseas dejar fijo el enlace /exec para todo el personal, pégalo entre las comillas:
+    var URL_WEBAPP_OFICIAL = "";
+    var STORAGE_KEY = "est30_webapp_exec_url";
+
+    function obtenerUrlGuardada() {
+      var params = new URLSearchParams(window.location.search);
+      var urlParam = (params.get("url") || "").trim();
+      if (urlParam && urlParam.indexOf("script.google.com") !== -1) {
+        try { localStorage.setItem(STORAGE_KEY, urlParam); } catch (e) {}
+        return urlParam;
+      }
+      if (URL_WEBAPP_OFICIAL && URL_WEBAPP_OFICIAL.indexOf("script.google.com") !== -1) {
+        return URL_WEBAPP_OFICIAL;
+      }
+      try {
+        return (localStorage.getItem(STORAGE_KEY) || "").trim();
+      } catch (e) {
+        return "";
+      }
+    }
+
+    function guardarYEntrar() {
+      var val = (document.getElementById("inpExecUrl").value || "").trim();
+      if (!val || val.indexOf("script.google.com") === -1 || val.indexOf("/exec") === -1) {
+        alert("Por favor pega el enlace oficial de Google Apps Script que termina en /exec");
+        return;
+      }
+      try { localStorage.setItem(STORAGE_KEY, val); } catch (e) {}
+      cargarIframe(val);
+    }
+
+    function cambiarUrl() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      mostrarConfiguracion("");
+    }
+
+    function cargarIframe(url) {
+      var cont = document.getElementById("appContainer");
+      cont.innerHTML =
+        '<iframe src="' + url.replace(/"/g, "&quot;") + '" allow="camera; microphone; clipboard-write; fullscreen"></iframe>' +
+        '<div class="float-tools">' +
+          '<a class="float-btn" href="' + url.replace(/"/g, "&quot;") + '" target="_blank" rel="noopener">Abrir directo ↗</a>' +
+          '<button class="float-btn" onclick="cambiarUrl()">⚙️</button>' +
+        '</div>';
+    }
+
+    function mostrarConfiguracion(urlActual) {
+      var cont = document.getElementById("appContainer");
+      cont.innerHTML =
+        '<div class="setup-wrap">' +
+          '<div class="card">' +
+            '<span class="badge">EST N° 30 “José María Parás”</span>' +
+            '<h1>Acceso al Sistema Integral de Prefectura</h1>' +
+            '<p>Vincula una sola vez el enlace oficial de tu Web App (<code>.../exec</code>) para entrar desde cualquier PC, tablet o celular.</p>' +
+            '<label for="inpExecUrl">Enlace oficial de Apps Script (/exec):</label>' +
+            '<input id="inpExecUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" value="' + (urlActual || "") + '">' +
+            '<button class="btn" onclick="guardarYEntrar()">Entrar a la Aplicación</button>' +
+            '<div class="tips">' +
+              '<b>¿Por qué no abre en otra computadora?</b><br>' +
+              '1. En Apps Script → <b>Implementar → Administrar implementaciones</b>, verifica que <b>Quién tiene acceso</b> esté en <b>“Cualquier usuario”</b> (no “Solo yo”).<br>' +
+              '2. Si la computadora tiene varias cuentas de Gmail abiertas en Chrome, abre este portal o usa una ventana de incógnito.<br>' +
+              '3. También puedes compartir este enlace directo con <code>?url=TU_ENLACE_EXEC</code> para que entre automático en otros dispositivos.' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    (function init() {
+      var url = obtenerUrlGuardada();
+      if (url) cargarIframe(url);
+      else mostrarConfiguracion("");
+    })();
+  </script>
+</body>
+</html>
